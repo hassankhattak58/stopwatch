@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Down Timer</title>
+</head>
+
+<body>
+
+    <div class="parent">
+        <div class="timer_child">
+            <div class="timer">
+                <span id="min" class="countdown">10</span>:
+                <span id="sec" class="countdown">00</span>
+            </div>
+            <div class="btn">
+                <button onclick="starttimer()">Start</button>
+                <button onclick="stoptimer()">Stop</button>
+            </div>
+        </div>
+        <div class="timer_input">
+            <div class="">
+                <input type="number" name="" id="mininput" min="0" required value="01">:
+                <input type="number" name="" id="secinput" min="0" required value="00">
+            </div>
+            <span>
+                <button onclick="settimer()">Set Countdown</button>
+            </span>
+        </div>
+    </div>
+
+    <script>
+
+        function starttimer() {
+
+            let min = document.getElementById("min").innerText;
+            let sec = document.getElementById("sec").innerText;
+
+            myinterval = setInterval(() => {
+                if (sec == 0) {
+                    if (min == 0) {
+                        clearInterval(myinterval);
+                        alert("Timer Up");
+                    } else {
+                        sec = 60;
+                        min -= 1;
+                        document.getElementById("min").innerText = min;
+                        document.getElementById("sec").innerText = sec;
+                    }
+                }
+                if (sec > 0) {
+
+                    sec -= 1;
+                    document.getElementById("sec").innerText = sec;
+
+                }
+
+            }, 1000);
+        }
+
+        function stoptimer() {
+            clearInterval(myinterval);
+        }
+
+
+        function settimer() {
+
+            let min = document.getElementById("mininput").value;
+            let sec = document.getElementById("secinput").value;
+
+            if (min >= 0 && sec >= 0) {
+                document.getElementById("sec").innerText = sec;
+                document.getElementById("min").innerText = min;
+            } else {
+                alert("Please enter values greater than 0.");
+            }
+
+
+        }
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
